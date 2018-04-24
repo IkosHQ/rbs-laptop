@@ -1,0 +1,9 @@
+---
+
+- name: setup Python tools
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - python-pip
+    - python-setuptools

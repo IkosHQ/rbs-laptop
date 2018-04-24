@@ -8,6 +8,6 @@ This repo is designed to be run as headless Ansible.
 Running locally
 ---------------
 
-    ansible-playbook -i "localhost," -c local --become rbs.yml
+    ansible-playbook -i "localhost," -c local --become -K rbs.yml
 
 

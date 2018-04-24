@@ -5,5 +5,8 @@
     name: "{{ item }}"
     state: present
   loop:
+    - gcc
+    - python-dev
     - python-pip
     - python-setuptools
+    - libmysqlclient-dev

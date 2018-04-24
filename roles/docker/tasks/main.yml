@@ -1,0 +1,27 @@
+---
+
+- name: setup Python tools
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common 
+
+- name: add Docker apt key
+  apt_key:
+    id: 0EBFCD88
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: add Docker repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+    state: present
+
+- name: install Docker
+  package:
+    name: docker-ce
+    state: present

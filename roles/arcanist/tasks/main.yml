@@ -1,0 +1,10 @@
+---
+
+# Prereqs
+- name: install prereqs
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - php
+    - php-curl

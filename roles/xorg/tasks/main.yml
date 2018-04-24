@@ -1,0 +1,29 @@
+---
+
+- name: Add openrazer repository
+  apt_repository:
+    repo: 'ppa:openrazer/stable'
+
+- name: install openrazer-meta
+  package: openrazer-meta
+  state: present
+
+- name: ensure razerkbd module loaded
+  modprobe:
+    name: razerkbd
+    state: present
+
+- name: Creates xorg.conf.d directory
+  file:
+    path: /etc/x11/xorg.conf.d
+    state: directory
+
+- name: deploy X11 CAPSLOCK fix 
+  register: xorgreload
+  copy:
+    src: 20-razer.conf
+    dest: /etc/X11/xorg.conf.d/20-razer.conf
+
+- name: reload Xorg
+  command: killall -HUP Xorg
+  when: xorgreload.changed

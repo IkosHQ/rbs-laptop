@@ -2,7 +2,7 @@
 
 - hosts: all
   roles:
-		- arcanist
+    - arcanist
     - docker
-		- python
+    - python
     - xorg

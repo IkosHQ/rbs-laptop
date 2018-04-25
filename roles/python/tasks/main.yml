@@ -1,5 +1,14 @@
 ---
 
+- name: cleanup bad Python packages
+  package:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - python-setuptools
+    - python-pip
+    - python-virtualenv
+
 - name: setup Python tools
   package:
     name: "{{ item }}"
@@ -7,6 +16,31 @@
   loop:
     - gcc
     - python-dev
-    - python-pip
-    - python-setuptools
     - libmysqlclient-dev
+
+- name: check for pip
+  stat:
+    path: /usr/local/bin/pip
+  register: pip_found
+
+- name: install get-pip.py
+  get_url:
+    url: https://bootstrap.pypa.io/get-pip.py
+    dest: /var/tmp/get-pip.py
+  when: pip_found.stat.exists == False
+  register: got_get_pip
+
+- name: run get-pip.py
+  command: /usr/bin/python /var/tmp/get-pip.py
+  when: got_get_pip|changed
+
+- name: install standard python packages
+  pip:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - flake8
+    - setuptools
+    - virtualenv
+    - virtualenvwrapper
+    - wheel

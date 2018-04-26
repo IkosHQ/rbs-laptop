@@ -4,5 +4,6 @@
   roles:
     - arcanist
     - docker
+    - kernel
     - python
     - xorg

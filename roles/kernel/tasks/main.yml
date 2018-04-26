@@ -1,0 +1,11 @@
+---
+
+- name: Install /etc/default/grub
+  copy:
+    src: etc-default-grub
+    dest: /etc/default/grub
+  register: updated_grub
+
+- name: Upate grub
+  command: /usr/sbin/update-grub
+  when: updated_grub.changed

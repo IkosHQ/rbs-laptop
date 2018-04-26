@@ -33,7 +33,7 @@
 
 - name: run get-pip.py
   command: /usr/bin/python /var/tmp/get-pip.py
-  when: got_get_pip|changed
+  when: got_get_pip.changed
 
 - name: install standard python packages
   pip:

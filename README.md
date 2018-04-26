@@ -11,3 +11,7 @@ Running locally
     ansible-playbook -i "localhost," -c local --become -K rbs.yml
 
 
+Disabled features
+-----------------
+
+- Touchscreen

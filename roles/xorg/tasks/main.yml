@@ -2,7 +2,7 @@
 
 - name: Add openrazer repository
   apt_repository:
-    repo: deb http://ppa.launchpad.net/openrazer/stable/ubuntu xenial main
+    repo: "deb http://ppa.launchpad.net/openrazer/stable/ubuntu {{ mint_to_ubuntu_release[ansible_distribution_release] }} main"
     state: present
 
 - name: install openrazer-meta
